@@ -1,4 +1,4 @@
-package saperclient.Login.Frames.Login;
+package saperclient.View.Frames.Login;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import saperserver.Login.Listeners.LoginListener;
+import saperclient.Controller.LoginListener;
 
 /**
  * @author Damian
@@ -20,8 +20,8 @@ public class FormLoginPanel {
     
     //==========================================================================
     
-    private JFrame frame;
-    private JPanel panel;
+    private final JFrame frame;
+    private final JPanel panel;
     
     private JTextField login_field;
     private JPasswordField password_field;

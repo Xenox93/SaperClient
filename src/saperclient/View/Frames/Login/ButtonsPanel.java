@@ -1,4 +1,4 @@
-package saperclient.Login.Frames.Login;
+package saperclient.View.Frames.Login;
 
 /**
  * @author Damian

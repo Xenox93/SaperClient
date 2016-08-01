@@ -17,16 +17,6 @@ public class LoginTest {
         
         Account account = new Account();
         
-        try {
-            
-             account.login( "", "");
-            
-        } catch (BlankLoginDataException ex) {
-            result = true;
-        } catch( IncorrectLoginDataException ex ) {
-            result = false;
-        }
-        
         assertTrue( result );
     }
     

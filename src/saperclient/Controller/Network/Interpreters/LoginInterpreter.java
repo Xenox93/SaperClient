@@ -1,5 +1,6 @@
 package saperclient.Controller.Network.Interpreters;
 
+import saperclient.Controller.Network.Client;
 import saperclient.Controller.Network.Interpreter.Interpreter;
 import saperclient.Controller.Network.Interpreters.Events.PrintEvent;
 
@@ -8,8 +9,10 @@ import saperclient.Controller.Network.Interpreters.Events.PrintEvent;
  */
 public class LoginInterpreter extends Interpreter {
     
-    public LoginInterpreter() {
+    public LoginInterpreter( Client client ) {
         
-        event = new PrintEvent();
+        super();
+        
+        event = new PrintEvent( client );
     }
 }

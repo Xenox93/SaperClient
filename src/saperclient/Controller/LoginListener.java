@@ -1,22 +1,34 @@
-package saperserver.Login.Listeners;
+package saperclient.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
 import javax.swing.JFrame;
-import saperclient.Login.Frames.Login.FormLoginPanel;
+
+import saperclient.Controller.Network.Client;
+import saperclient.Controller.Network.Requests.LoginRequest;
+
+import saperclient.Model.Exceptions.Account.BlankLoginDataException;
+import saperclient.Model.Exceptions.Account.IncorrectLoginDataException;
+
+import saperclient.View.Dialogs.MessageDialog;
+import saperclient.View.Dialogs.ProgressDialog;
+
+import saperclient.View.Frames.Login.FormLoginPanel;
 
 /**
  * @author Damian
  */
 public class LoginListener extends KeyAdapter implements ActionListener {
     
-    private FormLoginPanel form_login_panel;
-    private JFrame frame;
+    private final FormLoginPanel form_login_panel;
+    private final JFrame frame;
     
     //==========================================================================
     
@@ -54,60 +66,77 @@ public class LoginListener extends KeyAdapter implements ActionListener {
     
     private void signIn() {
         
-        /*JDialog dialog;
+        Thread dialog_thread = new Thread() {
+            
+            private final JDialog dialog = new ProgressDialog( "Logowanie", frame );
+                
+            @Override
+            public void run() {
+                
+                if( dialog != null && !dialog.isVisible() )
+                dialog.setVisible( true );
+            }
+            
+            @Override
+            public void interrupt() {
+            
+                dialog.setVisible(false);
+                dialog.dispose();
+            }
+        };
         
-        if( isEmpty() )
-            dialog = new MessageDialog( "Wypełnij wszystkie pola.", parent );
-        else {
+        Thread thread = new Thread() {
             
-            Thread thread = new Thread() {
-                 
-                private final JDialog dialog = new ProgressDialog( "Logowanie", parent );
-                
-                @Override
-                public void run() {
-                    if( !dialog.isVisible() )
-                        dialog.setVisible( true );
-                }
-                
-                @Override
-                public void interrupt() {
-                    dialog.setVisible(false);
-                    parent.remove(dialog);
-                    dialog.dispose();
-                };
-                
-             };
+            @Override
+            public void run() {
             
-            Thread thread1 = new Thread() {
-                 
-                private JDialog dialog;
+                dialog_thread.start();
                 
-                @Override
-                public void run() {
-                    
-                    thread.start();
-                    
-                    if( Account.getInstance().signIn( getIndex(), getPassword() ) ) {
+                    String msg;
+
+                    try {
+
+                        login( form_login_panel.getLogin(), form_login_panel.getPassword() );
                         
-                        thread.interrupt();
-                        new TimetableFrame();
-                        parent.dispose();
+                        //new RegisterFrame();
+                        frame.dispose();
                         
-                        interrupt();
-                        
-                    } else {
-                        
-                        thread.interrupt();
-                        dialog = new MessageDialog( "Nie można było zalogować.", parent );
-                        interrupt();
+                        msg = "";
+
+                    } catch( BlankLoginDataException e ) {
+
+                        msg = "Wypełnij wszystkie pola.";
+
+                    } catch( IncorrectLoginDataException ex ) {
+
+                        msg = "Nie można było zalogować.";
+
                     }
-                }
                 
-            };
-            
-            thread1.start();
-        }*/
+                dialog_thread.interrupt();
+                
+                if( !msg.isEmpty() )
+                    new MessageDialog( msg, frame );
+                
+                interrupt();
+            }
+        };
+        
+        thread.start();
     }
     
+    //==========================================================================
+    
+    private void login( final String login, final String password ) throws BlankLoginDataException, IncorrectLoginDataException {
+        
+        if( login.isEmpty() || password.isEmpty() )
+            throw new BlankLoginDataException();
+        
+        Client client = new Client( "192.168.0.100", 5252 );
+        
+            client.sendMsg( new LoginRequest( login, password ) );
+            client.getMsgs();
+        
+        client.disconnect();
+    }
 }

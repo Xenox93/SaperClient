@@ -1,16 +1,18 @@
-package saperclient.Login.Frames.Login;
+package saperclient.View.Frames.Login;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
-import saperserver.Login.Listeners.LoginListener;
-import saperserver.Login.Listeners.RegisterListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+import javax.swing.JFrame;
+import saperclient.Controller.LoginListener;
 
 /**
  * @author Damian

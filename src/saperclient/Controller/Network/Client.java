@@ -8,6 +8,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 import saperclient.Controller.Network.Exceptions.BlankCommandException;
+import saperclient.Controller.Network.Interpreter.Interpreter;
+import saperclient.Controller.Network.Interpreters.LoginInterpreter;
 
 /**
  * @author Damian
@@ -19,10 +21,12 @@ public class Client {
     private ObjectOutputStream out;
     private ObjectInputStream in;
     
+    private Interpreter interpreter = new LoginInterpreter( this );
+    
     //==========================================================================
 
-    public Client( String address, int port )
-    {
+    public Client( String address, int port ) {
+        
         try
         {
             socket = new Socket( InetAddress.getByName( address ), port );
@@ -37,26 +41,10 @@ public class Client {
         }
     }
     
-    public Client( Socket socket )
-    {
-        this.socket = socket;
-        
-        try
-        {
-            out = new ObjectOutputStream( this.socket.getOutputStream() );
-            in = new ObjectInputStream( this.socket.getInputStream() );
-        }
-        catch( IOException e )
-        {
-            e.getStackTrace();
-            disconnect();
-        }
-    }
-    
     //==========================================================================
     
-    public void disconnect()
-    {
+    public final void disconnect() {
+        
         try
         {
             socket.close();
@@ -69,11 +57,11 @@ public class Client {
     
     //==========================================================================
     
-    public void sendMsg( String msg )
-    {
+    public void sendMsg( Request cmd ) {
+        
         try
         {
-            out.writeObject( msg );
+            out.writeObject( cmd.toString() );
             out.flush();
         }
         catch( IOException e )
@@ -82,12 +70,35 @@ public class Client {
             disconnect();
         }
     }
-    private String getMsg() throws BlankCommandException
-    {
+    public void getMsgs() {
+        
+       while( true )
+       {
+           try {
+               
+               interpreter.exec( getMsg() );
+               return;
+               
+           } catch( BlankCommandException e ) {
+               
+               e.getStackTrace();
+               disconnect();
+           }
+        }
+    }
+    private Request getMsg() throws BlankCommandException {
+        
         try
         {
-           if( !socket.isClosed() )
-               return in.readObject().toString();
+           if( !socket.isClosed() ) {
+               
+               String request = in.readObject().toString();
+               
+               if( request.isEmpty() )
+                   throw new BlankCommandException();
+               
+               return new Request( request );
+           }
         }
         catch( IOException | ClassNotFoundException e )
         {
