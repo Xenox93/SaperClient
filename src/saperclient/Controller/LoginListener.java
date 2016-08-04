@@ -12,7 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import saperclient.Controller.Network.Client;
-import saperclient.Controller.Network.Requests.LoginRequest;
+import saperclient.Controller.Network.Requests.LoginNetRequest;
+import saperclient.Model.Account;
 
 import saperclient.Model.Exceptions.Account.BlankLoginDataException;
 import saperclient.Model.Exceptions.Account.IncorrectLoginDataException;
@@ -89,31 +90,36 @@ public class LoginListener extends KeyAdapter implements ActionListener {
             
             @Override
             public void run() {
-            
-                dialog_thread.start();
                 
-                    String msg;
-
-                    try {
-
-                        login( form_login_panel.getLogin(), form_login_panel.getPassword() );
-                        
-                        //new RegisterFrame();
-                        frame.dispose();
-                        
-                        msg = "";
-
-                    } catch( BlankLoginDataException e ) {
-
-                        msg = "Wypełnij wszystkie pola.";
-
-                    } catch( IncorrectLoginDataException ex ) {
-
-                        msg = "Nie można było zalogować.";
-
-                    }
+                String msg = "";
                 
-                dialog_thread.interrupt();
+                try {
+                    
+                    dialog_thread.start();
+                    
+                        login( new Account( form_login_panel.getLogin(), form_login_panel.getPassword() ) );
+                        
+                    dialog_thread.interrupt();
+
+                    //new RegisterFrame();
+                    frame.dispose();
+                
+                } catch( BlankLoginDataException e ) {
+                    
+                    msg = "Wypełnij wszystkie pola.";
+                    dialog_thread.interrupt();
+                
+                } catch( IncorrectLoginDataException e ) {
+                    
+                    msg = "Niepoprawne dane logowania.";
+                    dialog_thread.interrupt();
+                
+                } catch( Exception e ) {
+                    
+                    msg = "Problem z połączeniem.";
+                    dialog_thread.interrupt();
+                    e.printStackTrace();
+                }
                 
                 if( !msg.isEmpty() )
                     new MessageDialog( msg, frame );
@@ -127,14 +133,14 @@ public class LoginListener extends KeyAdapter implements ActionListener {
     
     //==========================================================================
     
-    private void login( final String login, final String password ) throws BlankLoginDataException, IncorrectLoginDataException {
+    private void login( Account account ) throws Exception {
         
-        if( login.isEmpty() || password.isEmpty() )
+        if( account.getLogin().isEmpty() || account.getPassword().isEmpty() )
             throw new BlankLoginDataException();
         
         Client client = new Client( "192.168.0.100", 5252 );
         
-            client.sendMsg( new LoginRequest( login, password ) );
+            client.sendMsg( new LoginNetRequest( account ) );
             client.getMsgs();
         
         client.disconnect();

@@ -1,6 +1,6 @@
 package saperclient.Controller.Network.Interpreter;
 
-import saperclient.Controller.Network.Request;
+import saperclient.Controller.Network.NetRequest;
 
 /**
  * @author Damian
@@ -11,7 +11,7 @@ public abstract class Interpreter
     
     //==========================================================================
     
-    public void exec( final Request command ) {
+    public void exec( final NetRequest command ) throws Exception {
         
         event.handle( command );
     }
