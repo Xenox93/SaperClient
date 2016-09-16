@@ -2,8 +2,8 @@ import saperclient.Model.Account;
 
 import org.junit.*;
 import static org.junit.Assert.assertTrue;
-import saperclient.Model.Exceptions.Account.BlankLoginDataException;
-import saperclient.Model.Exceptions.Account.IncorrectLoginDataException;
+import saperclient.Exceptions.BlankLoginDataException;
+import saperclient.Exceptions.IncorrectLoginDataException;
 
 /**
  * @author Damian

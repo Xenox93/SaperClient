@@ -1,4 +1,4 @@
-package saperclient.Model.Exceptions.Account;
+package saperclient.Exceptions;
 
 /**
  * @author Damian

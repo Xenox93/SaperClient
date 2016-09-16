@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import saperclient.Controller.LoginListener;
+import saperclient.SaperClient;
 
 /**
  * @author Damian
@@ -20,17 +21,14 @@ public class FormLoginPanel {
     
     //==========================================================================
     
-    private final JFrame frame;
     private final JPanel panel;
     
-    private JTextField login_field;
-    private JPasswordField password_field;
+    private static JTextField login_field;
+    private static JPasswordField password_field;
     
     //==========================================================================
     
-    public FormLoginPanel( JFrame frame ) {
-        
-        this.frame = frame;
+    public FormLoginPanel() {
         
         panel = new JPanel( new GridBagLayout() );
         
@@ -44,15 +42,23 @@ public class FormLoginPanel {
             layout.gridx = 0;
             layout.gridy = 1;
             
-        frame.add( panel, layout );
+        SaperClient.current_frame.add( panel, layout );
     }
     
     //==========================================================================
     
-    public final String getLogin() {
+    public static final String getLogin() {
+        
+        if( login_field == null )
+            return "";
+        
         return login_field.getText();
     }
-    public final String getPassword() {
+    public static final String getPassword() {
+        
+        if( password_field == null )
+            return "";
+        
         return String.valueOf( password_field.getPassword() );
     }
     
@@ -84,7 +90,7 @@ public class FormLoginPanel {
         login_field = new JTextField();
         
             login_field.setPreferredSize( SIZE_TEXT_FIELD );
-            login_field.addKeyListener( new LoginListener( frame, this ) );
+            login_field.addKeyListener( new LoginListener() );
 
         GridBagConstraints layout = new GridBagConstraints();
 
@@ -111,7 +117,7 @@ public class FormLoginPanel {
         password_field = new JPasswordField();
         
             password_field.setPreferredSize( SIZE_TEXT_FIELD );
-            password_field.addKeyListener( new LoginListener( frame, this ) );
+            password_field.addKeyListener( new LoginListener() );
         
         GridBagConstraints layout = new GridBagConstraints();
 

@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 import javax.swing.JFrame;
 import saperclient.Controller.LoginListener;
+import saperclient.SaperClient;
 
 /**
  * @author Damian
@@ -21,11 +22,7 @@ public class LoginFrame {
     
     private static final Dimension SIZE_BUTTON = new Dimension( 120, 30 );
     
-    //==========================================================================
-    
     private JFrame frame;
-    
-    private FormLoginPanel form_login_panel;
     
     //==========================================================================
     
@@ -40,6 +37,15 @@ public class LoginFrame {
                 frame.setLayout( new GridBagLayout() );
                 frame.getRootPane().setBorder( BorderFactory.createEmptyBorder( 30, 60, 30, 60 ) );
 
+                if( SaperClient.current_frame != null ) {
+                    
+                    SaperClient.current_frame.removeAll();
+                    SaperClient.current_frame.dispose();
+                    SaperClient.current_frame = null;
+                }
+                
+                SaperClient.current_frame = frame;
+                
                     addContent();
 
                 frame.pack();
@@ -84,7 +90,7 @@ public class LoginFrame {
     }
     private void addFormLoginPanel() {
         
-        form_login_panel = new FormLoginPanel( frame );
+        new FormLoginPanel();
     }
     private void addLoginButton() {
         
@@ -92,7 +98,7 @@ public class LoginFrame {
 
             login_button.setPreferredSize( SIZE_BUTTON );
             login_button.setName( "login" );
-            login_button.addActionListener( new LoginListener( frame, form_login_panel ) );
+            login_button.addActionListener( new LoginListener() );
         
         GridBagConstraints layout = new GridBagConstraints();
 
@@ -110,7 +116,7 @@ public class LoginFrame {
 
             register_button.setPreferredSize( SIZE_BUTTON );
             register_button.setName( "register" );
-            register_button.addActionListener( new LoginListener( frame, form_login_panel ) );
+            register_button.addActionListener( new LoginListener() );
         
         GridBagConstraints layout = new GridBagConstraints();
 

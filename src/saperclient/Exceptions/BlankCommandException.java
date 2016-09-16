@@ -1,4 +1,4 @@
-package saperclient.Controller.Network.Exceptions;
+package saperclient.Exceptions;
 
 /**
  * @author Damian

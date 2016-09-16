@@ -1,7 +1,7 @@
-package saperclient.Controller.Network.Interpreter;
+package saperclient.Network.Interpreter;
 
-import saperclient.Controller.Network.Client;
-import saperclient.Controller.Network.NetRequest;
+import saperclient.Network.Client;
+import saperclient.Network.NetRequest;
 
 /**
  * @author Damian

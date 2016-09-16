@@ -1,8 +1,7 @@
 package saperclient.Model;
 
-import saperclient.Model.Exceptions.Account.IncorrectLoginDataException;
+import saperclient.Exceptions.IncorrectLoginDataException;
 
-import saperclient.Controller.Network.Error;
 
 /**
  * @author Damian
@@ -51,12 +50,6 @@ public class Account extends Error {
     }
     
     //==========================================================================
-    
-    @Override
-    public String toString() {
-        
-        return new StringBuilder( "content:{login:" ).append( login ).append( ",password:" ).append( password ).append( ",error:" ).append( error ).append("}").toString();
-    }
 
     /**
      *

@@ -1,4 +1,4 @@
-package saperclient.Controller.Network;
+package saperclient.Model;
 
 /**
  * @author Damian

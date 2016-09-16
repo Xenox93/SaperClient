@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import saperclient.Model.Exceptions.Account.BlankLoginDataException;
-import saperclient.Model.Exceptions.Account.IncorrectLoginDataException;
+import saperclient.Exceptions.BlankLoginDataException;
+import saperclient.Exceptions.IncorrectLoginDataException;
 
 import saperclient.View.Frames.Login.FormLoginPanel;
 import saperclient.View.Frames.Login.LoginFrame;
