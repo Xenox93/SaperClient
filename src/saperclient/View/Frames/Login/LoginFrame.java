@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.SwingUtilities;
@@ -14,10 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+
 import saperclient.Controller.LoginListener;
+import saperclient.Controller.RankingListener;
 import saperclient.SaperClient;
 
 /**
@@ -75,7 +72,10 @@ public class LoginFrame {
         
         addLoginButton();
         addRegisterButton();
+        addRankingButton();
     }
+    
+    //--------------------------------------------------------------------------
     
     private void addLoginTitle() {
 
@@ -93,10 +93,12 @@ public class LoginFrame {
 
         frame.add( login_label, layout );
     }
-    private void addFormLoginPanel() {
-        
-        new FormLoginPanel();
-    }
+    
+        private void addFormLoginPanel() {
+
+            new FormLoginPanel();
+        }
+    
     private void addLoginButton() {
         
         JButton login_button = new JButton( "Zaloguj" );
@@ -108,10 +110,10 @@ public class LoginFrame {
         GridBagConstraints layout = new GridBagConstraints();
 
             layout.anchor = GridBagConstraints.CENTER;
-            layout.insets = new Insets( 20, 0, 0, 0 );
+            layout.insets = new Insets( 30, 0, 0, 0 );
             layout.gridwidth = 1;
             layout.gridx = 0;
-            layout.gridy = 3;
+            layout.gridy = 2;
 
         frame.add( login_button, layout );
     }
@@ -126,11 +128,28 @@ public class LoginFrame {
         GridBagConstraints layout = new GridBagConstraints();
 
             layout.anchor = GridBagConstraints.CENTER;
-            layout.insets = new Insets( 20, 4, 0, 0 );
+            layout.insets = new Insets( 30, 4, 0, 0 );
             layout.gridwidth = 1;
             layout.gridx = 1;
-            layout.gridy = 3;
+            layout.gridy = 2;
 
         frame.add( register_button, layout );
+    }
+    private void addRankingButton() {
+        
+        JButton ranking_button = new JButton( "Ranking" );
+
+            ranking_button.setPreferredSize( SIZE_BUTTON );
+            ranking_button.addActionListener( new RankingListener() );
+        
+        GridBagConstraints layout = new GridBagConstraints();
+
+            layout.anchor = GridBagConstraints.CENTER;
+            layout.insets = new Insets( 10, 0, 0, 0 );
+            layout.gridwidth = 2;
+            layout.gridx = 0;
+            layout.gridy = 3;
+
+        frame.add( ranking_button, layout );
     }
 }

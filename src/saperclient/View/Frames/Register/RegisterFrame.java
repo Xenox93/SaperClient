@@ -16,8 +16,6 @@ import javax.swing.JFrame;
 import saperclient.Controller.RegisterListener;
 import saperclient.SaperClient;
 
-import saperclient.View.Frames.Login.FormLoginPanel;
-
 /**
  *
  * @author Damian

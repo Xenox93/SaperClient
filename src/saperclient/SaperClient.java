@@ -11,6 +11,7 @@ public class SaperClient {
     
     public static Client client = null;
     public static JFrame current_frame = null;
+    public static JFrame saved_frame = null;
     
     //==========================================================================
     
