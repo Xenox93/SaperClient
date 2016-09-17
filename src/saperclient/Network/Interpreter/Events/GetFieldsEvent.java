@@ -1,19 +1,16 @@
 package saperclient.Network.Interpreter.Events;
 
-import com.google.gson.Gson;
-
 import saperclient.Network.Client;
 import saperclient.Network.Interpreter.Event;
 import saperclient.Network.NetRequest;
 
-import saperclient.Model.Account;
-
 /**
+ *
  * @author Damian
  */
-public class LoginEvent extends Event
-{
-    public LoginEvent( Client client )
+public class GetFieldsEvent extends Event {
+    
+    public GetFieldsEvent( Client client )
     {
         super( client );
     }
@@ -23,10 +20,9 @@ public class LoginEvent extends Event
     @Override
     public void handle( NetRequest command ) throws Exception
     {
-        if( command.getHeader().equals( "login" ) ) {
+        if( command.getHeader().equals( "check_board" ) ) {
             
-            Account account = new Gson().fromJson( command.getData(), Account.class );
-            account.checkError();
+            // Wypełnienie konkretnych pól tekstem
         }
         else
             forward( command );

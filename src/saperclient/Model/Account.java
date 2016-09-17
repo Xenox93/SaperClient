@@ -1,8 +1,6 @@
 package saperclient.Model;
 
-import saperclient.Exceptions.AccountExistException;
-import saperclient.Exceptions.AccountRegisterFailedException;
-import saperclient.Exceptions.IncorrectLoginDataException;
+import saperclient.Exceptions.*;
 
 /**
  * @author Damian

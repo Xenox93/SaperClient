@@ -1,4 +1,4 @@
-package saperclient.View.Frames.Login.Ranking;
+package saperclient.View.Frames.Ranking;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -8,19 +8,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingConstants;
 
 import javax.swing.JFrame;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
+
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import saperclient.Controller.RankingListener;
 
+import saperclient.Network.Interpreter.Events.RankingEvent;
 import saperclient.SaperClient;
 
 /**
@@ -129,13 +130,26 @@ public class RankingFrame {
                 @Override
                 public int getRowCount() {
 
-                    return 0;
+                    if( RankingEvent.ranking == null || RankingEvent.ranking.getResults() == null )
+                        return 0;
+                    
+                    return RankingEvent.ranking.getResults().size();
                 }
 
                 @Override
                 public Object getValueAt( int row, int col ) {
 
-                    return "";
+                    if( RankingEvent.ranking == null || RankingEvent.ranking.getResults() == null )
+                        return 0;
+                    
+                    if( col == 0 )
+                        return RankingEvent.ranking.getResults().get( row ).getLogin();
+                    else if( col == 1 )
+                        return RankingEvent.ranking.getResults().get( row ).getAmountOfGames();
+                    else if( col == 2 )
+                        return RankingEvent.ranking.getResults().get( row ).getAmountOfWinners();
+                    else
+                        return "";
                 }
             };
         
@@ -148,12 +162,6 @@ public class RankingFrame {
                 
                 table.getColumnModel().getColumn( i ).setCellRenderer( rightRenderer );
             }
-                /*table.getColumnModel().getColumn( i ).setMinWidth( 10 );
-                table.getColumnModel().getColumn( i ).setPreferredWidth( 10 );
-            }
-            
-            table.getColumnModel().getColumn(0).setMinWidth( 100 );
-            table.getColumnModel().getColumn(0).setPreferredWidth( 100 );*/
 
             GridBagConstraints layout = new GridBagConstraints();
 

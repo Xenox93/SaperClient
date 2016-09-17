@@ -1,7 +1,9 @@
 package saperclient.Network.Interpreter.Events;
 
 import com.google.gson.Gson;
+
 import saperclient.Model.Ranking;
+
 import saperclient.Network.Client;
 import saperclient.Network.Interpreter.Event;
 import saperclient.Network.NetRequest;

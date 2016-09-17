@@ -11,9 +11,7 @@ import javax.swing.JLabel;
 
 import javax.swing.JPanel;
 
-import saperclient.Controller.LoginListener;
 import saperclient.Controller.RegisterListener;
-
 import saperclient.SaperClient;
 
 /**

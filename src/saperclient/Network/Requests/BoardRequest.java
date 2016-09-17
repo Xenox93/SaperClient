@@ -1,27 +1,27 @@
 package saperclient.Network.Requests;
 
 import com.google.gson.Gson;
-
-import saperclient.Exceptions.*;
-import saperclient.Network.*;
-
 import javax.swing.JDialog;
-import saperclient.View.Dialogs.*;
-import saperclient.View.Frames.Login.*;
-import saperclient.View.Frames.Menu.MenuFrame;
-import saperclient.View.Frames.Register.FormRegisterPanel;
 
-import saperclient.Model.Account;
+import org.json.JSONObject;
+import saperclient.Model.Level;
+
+import saperclient.Network.*;
 import saperclient.SaperClient;
 
+import saperclient.View.Dialogs.*;
+
+import saperclient.View.Frames.Board.BoardFrame;
+
 /**
+ *
  * @author Damian
  */
-public class LoginNetRequest {
+public class BoardRequest {
     
-    public static void signIn() {
+    public static void getBoard() {
         
-        JDialog dialog = new ProgressDialog( "Logowanie..." );
+        JDialog dialog = new ProgressDialog( "Pobieranie planszy..." );
         String msg = "";
         
         Thread dialog_thread = new Thread() {
@@ -48,24 +48,13 @@ public class LoginNetRequest {
         
         try {
             
-            Account account = new Account( FormLoginPanel.getLogin(), FormLoginPanel.getPassword() );
-
-            if( account.getLogin().isEmpty() || account.getPassword().isEmpty() )
-                throw new BlankLoginDataException();
-            
             dialog_thread.start();
             
             if( SaperClient.client == null )
                 SaperClient.client = new Client( SaperClient.SERVER_IP, SaperClient.SERVER_PORT );
 
-            SaperClient.client.sendMsg( new NetRequest( "login", new Gson().toJson( account, Account.class ) ) );
+            SaperClient.client.sendMsg( new NetRequest( "prepare_board", new Gson().toJson( BoardFrame.level, Level.class ) ) );
             SaperClient.client.getMsgs();
-
-        } catch( BlankLoginDataException e ) {
-            msg = "Wypełnij wszystkie pola.";
-
-        } catch( IncorrectLoginDataException e ) {
-            msg = "Niepoprawne dane logowania.";
 
         } catch( Exception e ) {
             msg = "Problem z połączeniem.";
@@ -78,12 +67,12 @@ public class LoginNetRequest {
             if( !msg.isEmpty() )
                 new MessageDialog( msg, SaperClient.current_frame );
             else
-                new MenuFrame();
+                new BoardFrame();
         }
     }
-    public static void register() {
+    public static void checkField( int row, int col ) {
         
-        JDialog dialog = new ProgressDialog( "Rejestrowanie..." );
+        JDialog dialog = new ProgressDialog( "Czekanie na odpowiedź serwera..." );
         String msg = "";
         
         Thread dialog_thread = new Thread() {
@@ -110,44 +99,33 @@ public class LoginNetRequest {
         
         try {
             
-            Account account = new Account( FormRegisterPanel.getLogin(), FormRegisterPanel.getPassword() );
-
-            if( account.getLogin().isEmpty() || account.getPassword().isEmpty() )
-                throw new BlankLoginDataException();
-            
             dialog_thread.start();
             
             if( SaperClient.client == null )
                 SaperClient.client = new Client( SaperClient.SERVER_IP, SaperClient.SERVER_PORT );
 
-            SaperClient.client.sendMsg( new NetRequest( "register", new Gson().toJson( account, Account.class ) ) );
+            JSONObject board_object = new JSONObject();
+                
+                board_object.put( "row", 0 );
+                board_object.put( "col", 0 );
+                
+            SaperClient.client.sendMsg( new NetRequest( "check_field", board_object.toString() ) );
             SaperClient.client.getMsgs();
 
-        } catch( BlankLoginDataException e ) {
-            msg = "Wypełnij wszystkie pola.";
-
-        } catch( AccountExistException e ) {
-            msg = "Konto już istnieje.";
-
-        } catch( AccountRegisterFailedException ex ) {
-            msg = "Błędne rejestrowanie konta.";
-            
         } catch( Exception e ) {
             msg = "Problem z połączeniem.";
             e.printStackTrace();
 
         } finally {
             
-            if( dialog_thread != null ) {
-                
-                dialog_thread.interrupt();
-                dialog_thread = null;
-            }
+            dialog_thread.interrupt();
             
-            if( !msg.isEmpty() )
+            if( !msg.isEmpty() ) {
+                
                 new MessageDialog( msg, SaperClient.current_frame );
-            else
-                new LoginFrame();
+            
+            } else
+                new BoardFrame();
         }
     }
 }

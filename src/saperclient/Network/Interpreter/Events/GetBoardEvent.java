@@ -1,19 +1,19 @@
 package saperclient.Network.Interpreter.Events;
 
-import com.google.gson.Gson;
-
+import saperclient.Model.Level;
 import saperclient.Network.Client;
 import saperclient.Network.Interpreter.Event;
 import saperclient.Network.NetRequest;
 
-import saperclient.Model.Account;
+import saperclient.View.Frames.Board.BoardFrame;
 
 /**
+ *
  * @author Damian
  */
-public class LoginEvent extends Event
-{
-    public LoginEvent( Client client )
+public class GetBoardEvent extends Event {
+    
+    public GetBoardEvent( Client client )
     {
         super( client );
     }
@@ -23,10 +23,9 @@ public class LoginEvent extends Event
     @Override
     public void handle( NetRequest command ) throws Exception
     {
-        if( command.getHeader().equals( "login" ) ) {
+        if( command.getHeader().equals( "get_board" ) ) {
             
-            Account account = new Gson().fromJson( command.getData(), Account.class );
-            account.checkError();
+            BoardFrame.level = new Level( 0, 0, 0 );
         }
         else
             forward( command );

@@ -1,18 +1,12 @@
 package saperclient.Network.Requests;
 
-import com.google.gson.Gson;
+import saperclient.Network.*;
 
 import javax.swing.JDialog;
+import saperclient.View.Dialogs.*;
+import saperclient.View.Frames.Ranking.RankingFrame;
 
-import saperclient.Network.Client;
-import saperclient.Network.NetRequest;
-
-import saperclient.View.Dialogs.MessageDialog;
-import saperclient.View.Dialogs.ProgressDialog;
-
-import saperclient.Model.Ranking;
 import saperclient.SaperClient;
-import saperclient.View.Frames.Login.Ranking.RankingFrame;
 
 /**
  *
@@ -55,7 +49,7 @@ public class RankingNetRequest {
                 SaperClient.client = new Client( SaperClient.SERVER_IP, SaperClient.SERVER_PORT );
 
             SaperClient.client.sendMsg( new NetRequest( "ranking", "" ) );
-            //SaperClient.client.getMsgs();
+            SaperClient.client.getMsgs();
 
         } catch( Exception e ) {
             msg = "Problem z połączeniem.";

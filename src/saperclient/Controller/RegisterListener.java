@@ -8,7 +8,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 
 import saperclient.Network.Requests.LoginNetRequest;
-
 import saperclient.View.Frames.Login.LoginFrame;
 
 /**
