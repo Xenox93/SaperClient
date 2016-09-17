@@ -1,7 +1,8 @@
 package saperclient.Model;
 
+import saperclient.Exceptions.AccountExistException;
+import saperclient.Exceptions.AccountRegisterFailedException;
 import saperclient.Exceptions.IncorrectLoginDataException;
-
 
 /**
  * @author Damian
@@ -54,14 +55,20 @@ public class Account extends Error {
     /**
      *
      * @throws IncorrectLoginDataException
+     * @throws saperclient.Exceptions.AccountExistException
+     * @throws saperclient.Exceptions.AccountRegisterFailedException
      */
     @Override
-    public void checkError() throws IncorrectLoginDataException {
+    public void checkError() throws IncorrectLoginDataException, AccountExistException, AccountRegisterFailedException {
         
         if( !isError() )
             return;
         
         if( error.equals( "IncorrectLoginDataException" ) )
             throw new IncorrectLoginDataException();
+        else if( error.equals( "AccountExistException" ) )
+            throw new AccountExistException();
+        else if( error.equals( "AccountRegisterFailedException" ) )
+            throw new AccountRegisterFailedException();
     }
 }

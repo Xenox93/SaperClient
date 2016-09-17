@@ -2,109 +2,38 @@ package saperclient.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
 
-import saperclient.Exceptions.BlankLoginDataException;
-import saperclient.Exceptions.IncorrectLoginDataException;
+import saperclient.Network.Requests.LoginNetRequest;
 
-import saperclient.View.Frames.Login.FormLoginPanel;
 import saperclient.View.Frames.Login.LoginFrame;
 
 /**
  * @author Damian
  */
-public class RegisterListener implements ActionListener {
+public class RegisterListener extends KeyAdapter implements ActionListener {
     
-    private final FormLoginPanel form_login_panel;
-    private final JFrame frame;
-    
-    //==========================================================================
-    
-    public RegisterListener( JFrame frame, FormLoginPanel form_login_panel ) {
+    @Override
+    public void keyReleased( KeyEvent e ) {
         
-        this.frame = frame;
-        this.form_login_panel = form_login_panel;
+        if( e.getKeyCode() == KeyEvent.VK_ENTER )
+            LoginNetRequest.register();
     }
     
-    //==========================================================================
+    //--------------------------------------------------------------------------
     
     @Override
     public void actionPerformed( ActionEvent e ) {
         
-        Thread dialog_thread = new Thread() {
-            
-            //private JDialog dialog;
-                
-            @Override
-            public void run() {
-                
-                /*if( dialog == null ) {
-                    
-                    dialog = new ProgressDialog( "Logowanie", parent );
-                    dialog.setVisible( true );
-                }*/
-            }
-            
-            @Override
-            public void interrupt() {
-            
-                /*dialog.setVisible(false);
-                dialog.dispose();*/
-            }
-        };
+        JButton button = (JButton)e.getSource();
         
-        Thread thread = new Thread() {
-            
-            @Override
-            public void run() {
-            
-                dialog_thread.start();
-                
-                    String msg;
-
-                    try {
-
-                        register( form_login_panel.getLogin(), form_login_panel.getPassword() );
-
-                        new LoginFrame();
-                        frame.dispose();msg = "";
-
-                    } catch( BlankLoginDataException ex ) {
-
-                        msg = "Wypełnij wszystkie pola.";
-
-                    } catch( IncorrectLoginDataException ex ) {
-
-                        msg = "Nie można było zalogować.";
-
-                    }
-                
-                dialog_thread.interrupt();
-                
-                /*if( !msg.isEmpty() )
-                    new MessageDialog( msg );*/
-                
-                interrupt();
-            }
-        };
-        
-        thread.start();
-    }
-    
-    //==========================================================================
-    
-    private void register( final String login, final String password ) throws BlankLoginDataException, IncorrectLoginDataException {
-        
-        if( login.isEmpty() || password.isEmpty() )
-            throw new BlankLoginDataException();
-        
-        /*try {
-            
-            
-            
-        } catch( IncorrectLoginDataException ex ) {
-            throw new IncorrectLoginDataException();
-        }*/
+        if( button.getName().equals( "register" ) )
+            LoginNetRequest.register();
+        else if( button.getName().equals( "back" ) ) {
+            new LoginFrame();
+        }
     }
 }

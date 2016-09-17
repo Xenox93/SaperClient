@@ -1,29 +1,28 @@
-package saperclient.View.Frames.Login;
+package saperclient.View.Frames.Register;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.SwingUtilities;
+import javax.swing.BorderFactory;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import saperclient.Controller.LoginListener;
+
+import saperclient.Controller.RegisterListener;
 import saperclient.SaperClient;
 
+import saperclient.View.Frames.Login.FormLoginPanel;
+
 /**
+ *
  * @author Damian
  */
-public class LoginFrame {
+public class RegisterFrame {
     
     private static final Dimension SIZE_BUTTON = new Dimension( 120, 30 );
     
@@ -31,7 +30,7 @@ public class LoginFrame {
     
     //==========================================================================
     
-    public LoginFrame() {
+    public RegisterFrame() {
         
         SwingUtilities.invokeLater( new Runnable() {
             
@@ -59,7 +58,7 @@ public class LoginFrame {
                 frame.setResizable( false );
 
                 frame.setLocationRelativeTo( null );
-                frame.setTitle( "Saper - Logowanie" );
+                frame.setTitle( "Saper - Rejestrowanie" );
                 frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
             }
         });
@@ -69,19 +68,19 @@ public class LoginFrame {
     
     private void addContent() {
 
-        addLoginTitle();
+        addRegisterTitle();
         
-        addFormLoginPanel();
+            addFormLoginPanel();
         
-        addLoginButton();
         addRegisterButton();
+        addBackButton();
     }
     
-    private void addLoginTitle() {
+    private void addRegisterTitle() {
 
-        JLabel login_label = new JLabel( "Logowanie" );
+        JLabel register_label = new JLabel( "Rejestrowanie" );
 
-            login_label.setFont( login_label.getFont().deriveFont( 30.f ) );
+            register_label.setFont( register_label.getFont().deriveFont( 30.f ) );
 
         GridBagConstraints layout = new GridBagConstraints();
 
@@ -91,19 +90,19 @@ public class LoginFrame {
             layout.gridx = 0;
             layout.gridy = 0;
 
-        frame.add( login_label, layout );
+        frame.add( register_label, layout );
     }
     private void addFormLoginPanel() {
         
-        new FormLoginPanel();
+        new FormRegisterPanel();
     }
-    private void addLoginButton() {
+    private void addRegisterButton() {
         
-        JButton login_button = new JButton( "Zaloguj" );
+        JButton register_button = new JButton( "Zarejestruj" );
 
-            login_button.setPreferredSize( SIZE_BUTTON );
-            login_button.setName( "login" );
-            login_button.addActionListener( new LoginListener() );
+            register_button.setPreferredSize( SIZE_BUTTON );
+            register_button.setName( "register" );
+            register_button.addActionListener( new RegisterListener() );
         
         GridBagConstraints layout = new GridBagConstraints();
 
@@ -113,15 +112,15 @@ public class LoginFrame {
             layout.gridx = 0;
             layout.gridy = 3;
 
-        frame.add( login_button, layout );
+        frame.add( register_button, layout );
     }
-    private void addRegisterButton() {
+    private void addBackButton() {
         
-        JButton register_button = new JButton( "Zarejestruj" );
+        JButton back_button = new JButton( "Anuluj" );
 
-            register_button.setPreferredSize( SIZE_BUTTON );
-            register_button.setName( "register" );
-            register_button.addActionListener( new LoginListener() );
+            back_button.setPreferredSize( SIZE_BUTTON );
+            back_button.setName( "back" );
+            back_button.addActionListener( new RegisterListener());
         
         GridBagConstraints layout = new GridBagConstraints();
 
@@ -131,6 +130,6 @@ public class LoginFrame {
             layout.gridx = 1;
             layout.gridy = 3;
 
-        frame.add( register_button, layout );
+        frame.add( back_button, layout );
     }
 }

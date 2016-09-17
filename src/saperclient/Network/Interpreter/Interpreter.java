@@ -2,6 +2,7 @@ package saperclient.Network.Interpreter;
 
 import saperclient.Network.Client;
 import saperclient.Network.Interpreter.Events.LoginEvent;
+import saperclient.Network.Interpreter.Events.RegisterEvent;
 import saperclient.Network.NetRequest;
 
 /**
@@ -16,6 +17,7 @@ public class Interpreter
     public Interpreter( Client client ) {
         
         event = new LoginEvent( client );
+        event.add( new RegisterEvent( client ) );
     }
     
     //==========================================================================
