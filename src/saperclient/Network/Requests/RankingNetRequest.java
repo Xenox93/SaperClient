@@ -16,34 +16,9 @@ public class RankingNetRequest {
     
     public static void getRanking() {
         
-        JDialog dialog = new ProgressDialog( "Pobieranie rankingu..." );
         String msg = "";
         
-        Thread dialog_thread = new Thread() {
-            
-            @Override
-            public void run() {
-                
-                if( dialog != null && !dialog.isVisible() )
-                    dialog.setVisible( true );
-            }
-            
-            @Override
-            public void interrupt() {
-                
-                if( dialog != null ) {
-                    dialog.setVisible( false );
-                    dialog.removeAll();
-                    dialog.dispose();
-                }
-            }
-        };
-        
-        //----------------------------------------------------------------------
-        
         try {
-            
-            dialog_thread.start();
             
             if( SaperClient.client == null )
                 SaperClient.client = new Client( SaperClient.SERVER_IP, SaperClient.SERVER_PORT );
@@ -56,8 +31,6 @@ public class RankingNetRequest {
             e.printStackTrace();
 
         } finally {
-            
-            dialog_thread.interrupt();
             
             if( !msg.isEmpty() ) {
                 

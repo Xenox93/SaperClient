@@ -27,14 +27,15 @@ import saperclient.SaperClient;
 public class BoardFrame {
     
     private static final Dimension SIZE_BUTTON = new Dimension( 30, 30 );
-    public static Level level;
-    public static Board board;
+    
+    private static List< List< JButton > > fields = new ArrayList<>();
+    
+    public static Level level = null;
+    public static Board board = null;
     
     //--------------------------------------------------------------------------
     
-    private List< List< JButton > > fields = new ArrayList<>();
-    
-    private JFrame frame;
+    private JFrame frame = null;
     
     //==========================================================================
     
@@ -72,6 +73,26 @@ public class BoardFrame {
         });
     }
     
+    //--------------------------------------------------------------------------
+    
+    public static void update() {
+        
+        for( int row = 0; row < board.getFields().size(); ++row )
+            for( int col = 0; col < board.getFields().get( row ).size(); ++col ) {
+                
+                String text = board.getFields().get( row ).get( col );
+                
+                if( text.isEmpty() )
+                    continue;
+                
+                if( !text.equals( "0" ) )
+                    fields.get( row ).get( col ).setText( text );
+                
+                fields.get( row ).get( col ).setEnabled( false );
+                fields.get( row ).get( col ).setSelected( true );
+            }
+    }
+    
     //==========================================================================
     
     private void addContent() {
@@ -83,7 +104,7 @@ public class BoardFrame {
     
     private void createBoard() {
         
-        fields.clear();
+        fields = new ArrayList<>();
         
         for( int row = 0; row < board.getFields().size(); ++row ) {
             

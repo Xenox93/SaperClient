@@ -21,30 +21,7 @@ public class LoginNetRequest {
     
     public static void signIn() {
         
-        JDialog dialog = new ProgressDialog( "Logowanie..." );
         String msg = "";
-        
-        Thread dialog_thread = new Thread() {
-            
-            @Override
-            public void run() {
-                
-                if( dialog != null && !dialog.isVisible() )
-                    dialog.setVisible( true );
-            }
-            
-            @Override
-            public void interrupt() {
-                
-                if( dialog != null ) {
-                    dialog.setVisible( false );
-                    dialog.removeAll();
-                    dialog.dispose();
-                }
-            }
-        };
-        
-        //----------------------------------------------------------------------
         
         try {
             
@@ -52,8 +29,6 @@ public class LoginNetRequest {
 
             if( account.getLogin().isEmpty() || account.getPassword().isEmpty() )
                 throw new BlankLoginDataException();
-            
-            dialog_thread.start();
             
             if( SaperClient.client == null )
                 SaperClient.client = new Client( SaperClient.SERVER_IP, SaperClient.SERVER_PORT );
@@ -73,8 +48,6 @@ public class LoginNetRequest {
 
         } finally {
             
-            dialog_thread.interrupt();
-            
             if( !msg.isEmpty() )
                 new MessageDialog( msg, SaperClient.current_frame );
             else
@@ -83,30 +56,7 @@ public class LoginNetRequest {
     }
     public static void register() {
         
-        JDialog dialog = new ProgressDialog( "Rejestrowanie..." );
         String msg = "";
-        
-        Thread dialog_thread = new Thread() {
-            
-            @Override
-            public void run() {
-                
-                if( dialog != null && !dialog.isVisible() )
-                    dialog.setVisible( true );
-            }
-            
-            @Override
-            public void interrupt() {
-                
-                if( dialog != null ) {
-                    dialog.setVisible( false );
-                    dialog.removeAll();
-                    dialog.dispose();
-                }
-            }
-        };
-        
-        //----------------------------------------------------------------------
         
         try {
             
@@ -114,8 +64,6 @@ public class LoginNetRequest {
 
             if( account.getLogin().isEmpty() || account.getPassword().isEmpty() )
                 throw new BlankLoginDataException();
-            
-            dialog_thread.start();
             
             if( SaperClient.client == null )
                 SaperClient.client = new Client( SaperClient.SERVER_IP, SaperClient.SERVER_PORT );
@@ -137,12 +85,6 @@ public class LoginNetRequest {
             e.printStackTrace();
 
         } finally {
-            
-            if( dialog_thread != null ) {
-                
-                dialog_thread.interrupt();
-                dialog_thread = null;
-            }
             
             if( !msg.isEmpty() )
                 new MessageDialog( msg, SaperClient.current_frame );

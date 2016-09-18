@@ -178,7 +178,7 @@ public class MenuFrame {
         }
         private void addAdvanced() {
             
-            JRadioButton advanced_level = new LevelChooser( "Advanced", 5, 5, 25 );
+            JRadioButton advanced_level = new LevelChooser( "Advanced", 5, 5, 15 );
                 
                 button_group.add( advanced_level );
                 advanced_level.addActionListener( new ActionListener() {
@@ -186,7 +186,7 @@ public class MenuFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         
-                        BoardFrame.level = new Level( 5, 5, 25 );
+                        BoardFrame.level = new Level( 5, 5, 15 );
                         LevelChooser.setEnable( false );
                     }
                     

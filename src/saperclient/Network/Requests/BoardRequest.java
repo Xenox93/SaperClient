@@ -21,34 +21,9 @@ public class BoardRequest {
     
     public static void getBoard() {
         
-        JDialog dialog = new ProgressDialog( "Pobieranie planszy..." );
         String msg = "";
         
-        Thread dialog_thread = new Thread() {
-            
-            @Override
-            public void run() {
-                
-                if( dialog != null && !dialog.isVisible() )
-                    dialog.setVisible( true );
-            }
-            
-            @Override
-            public void interrupt() {
-                
-                if( dialog != null ) {
-                    dialog.setVisible( false );
-                    dialog.removeAll();
-                    dialog.dispose();
-                }
-            }
-        };
-        
-        //----------------------------------------------------------------------
-        
         try {
-            
-            dialog_thread.start();
             
             if( SaperClient.client == null )
                 SaperClient.client = new Client( SaperClient.SERVER_IP, SaperClient.SERVER_PORT );
@@ -62,42 +37,15 @@ public class BoardRequest {
 
         } finally {
             
-            dialog_thread.interrupt();
-            
             if( !msg.isEmpty() )
                 new MessageDialog( msg, SaperClient.current_frame );
         }
     }
     public static void checkField( int row, int col ) {
         
-        JDialog dialog = new ProgressDialog( "Czekanie na odpowiedź serwera..." );
         String msg = "";
         
-        Thread dialog_thread = new Thread() {
-            
-            @Override
-            public void run() {
-                
-                if( dialog != null && !dialog.isVisible() )
-                    dialog.setVisible( true );
-            }
-            
-            @Override
-            public void interrupt() {
-                
-                if( dialog != null ) {
-                    dialog.setVisible( false );
-                    dialog.removeAll();
-                    dialog.dispose();
-                }
-            }
-        };
-        
-        //----------------------------------------------------------------------
-        
         try {
-            
-            dialog_thread.start();
             
             if( SaperClient.client == null )
                 SaperClient.client = new Client( SaperClient.SERVER_IP, SaperClient.SERVER_PORT );
@@ -115,8 +63,6 @@ public class BoardRequest {
             e.printStackTrace();
 
         } finally {
-            
-            dialog_thread.interrupt();
             
             if( !msg.isEmpty() )
                 new MessageDialog( msg, SaperClient.current_frame );
