@@ -66,8 +66,6 @@ public class BoardRequest {
             
             if( !msg.isEmpty() )
                 new MessageDialog( msg, SaperClient.current_frame );
-            else
-                new BoardFrame();
         }
     }
     public static void checkField( int row, int col ) {
@@ -106,8 +104,8 @@ public class BoardRequest {
 
             JSONObject board_object = new JSONObject();
                 
-                board_object.put( "row", 0 );
-                board_object.put( "col", 0 );
+                board_object.put( "row", row );
+                board_object.put( "col", col );
                 
             SaperClient.client.sendMsg( new NetRequest( "check_field", board_object.toString() ) );
             SaperClient.client.getMsgs();
@@ -120,12 +118,8 @@ public class BoardRequest {
             
             dialog_thread.interrupt();
             
-            if( !msg.isEmpty() ) {
-                
+            if( !msg.isEmpty() )
                 new MessageDialog( msg, SaperClient.current_frame );
-            
-            } else
-                new BoardFrame();
         }
     }
 }

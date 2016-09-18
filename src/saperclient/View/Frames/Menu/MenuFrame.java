@@ -130,6 +130,7 @@ public class MenuFrame {
             
                 button_group.add( beginner_level );
                 beginner_level.setSelected( true );
+                BoardFrame.level = new Level( 10, 10, 2 );
                 beginner_level.addActionListener( new ActionListener() {
                     
                     @Override

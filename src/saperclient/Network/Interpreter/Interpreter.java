@@ -16,7 +16,7 @@ public class Interpreter
     public Interpreter( Client client ) {
         
         event = new LoginEvent( client );
-        event.add( new RegisterEvent( client ) ).add( new RankingEvent( client ) ).add( new GetBoardEvent( client ) ).add(new GetFieldsEvent( client ) );
+        event.add( new RegisterEvent( client ) ).add( new RankingEvent( client ) ).add( new GetBoardEvent( client ) ).add( new LossEvent(client) ).add( new WinEvent(client));
     }
     
     //==========================================================================

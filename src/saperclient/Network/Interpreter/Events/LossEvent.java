@@ -1,16 +1,20 @@
 package saperclient.Network.Interpreter.Events;
 
+import javax.swing.JDialog;
 import saperclient.Network.Client;
 import saperclient.Network.Interpreter.Event;
 import saperclient.Network.NetRequest;
+import saperclient.SaperClient;
+import saperclient.View.Dialogs.MessageDialog;
+import saperclient.View.Frames.Menu.MenuFrame;
 
 /**
  *
  * @author Damian
  */
-public class GetFieldsEvent extends Event {
-    
-    public GetFieldsEvent( Client client )
+public class LossEvent extends Event
+{
+    public LossEvent( Client client )
     {
         super( client );
     }
@@ -20,9 +24,10 @@ public class GetFieldsEvent extends Event {
     @Override
     public void handle( NetRequest command ) throws Exception
     {
-        if( command.getHeader().equals( "check_board" ) ) {
+        if( command.getHeader().equals( "loss" ) ) {
             
-            // Wypełnienie konkretnych pól tekstem
+            new MessageDialog( "Przegrałeś", SaperClient.current_frame );
+            new MenuFrame();
         }
         else
             forward( command );
