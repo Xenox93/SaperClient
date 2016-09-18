@@ -26,7 +26,7 @@ public class LossEvent extends Event
     {
         if( command.getHeader().equals( "loss" ) ) {
             
-            new MessageDialog( "Przegrałeś", SaperClient.current_frame );
+            new MessageDialog( "You lost", SaperClient.current_frame );
             new MenuFrame();
         }
         else

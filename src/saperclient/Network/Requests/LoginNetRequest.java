@@ -37,13 +37,13 @@ public class LoginNetRequest {
             SaperClient.client.getMsgs();
 
         } catch( BlankLoginDataException e ) {
-            msg = "Wypełnij wszystkie pola.";
+            msg = "Fill all fields";
 
         } catch( IncorrectLoginDataException e ) {
-            msg = "Niepoprawne dane logowania.";
+            msg = "Incorrect login data";
 
         } catch( Exception e ) {
-            msg = "Problem z połączeniem.";
+            msg = "The problem with the connection";
             e.printStackTrace();
 
         } finally {
@@ -72,16 +72,16 @@ public class LoginNetRequest {
             SaperClient.client.getMsgs();
 
         } catch( BlankLoginDataException e ) {
-            msg = "Wypełnij wszystkie pola.";
+            msg = "Fill all fields";
 
         } catch( AccountExistException e ) {
-            msg = "Konto już istnieje.";
+            msg = "Account already exist";
 
         } catch( AccountRegisterFailedException ex ) {
-            msg = "Błędne rejestrowanie konta.";
+            msg = "Failed signup account";
             
         } catch( Exception e ) {
-            msg = "Problem z połączeniem.";
+            msg = "The problem with the connection";
             e.printStackTrace();
 
         } finally {

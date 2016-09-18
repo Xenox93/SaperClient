@@ -26,7 +26,7 @@ public class WinEvent extends Event
     {
         if( command.getHeader().equals( "win" ) ) {
             
-            new MessageDialog( "Wygrałeś", SaperClient.current_frame );
+            new MessageDialog( "You won", SaperClient.current_frame );
             new MenuFrame();
         }
         else

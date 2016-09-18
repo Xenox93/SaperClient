@@ -27,7 +27,7 @@ public class RankingNetRequest {
             SaperClient.client.getMsgs();
 
         } catch( Exception e ) {
-            msg = "Problem z połączeniem.";
+            msg = "The problem with the connection";
             e.printStackTrace();
 
         } finally {

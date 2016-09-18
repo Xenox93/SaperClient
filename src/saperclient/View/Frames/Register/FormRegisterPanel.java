@@ -113,7 +113,7 @@ public class FormRegisterPanel {
             layout.gridx = 0;
             layout.gridy = 1;
 
-        panel.add( new JLabel("Hasło"), layout );
+        panel.add( new JLabel("Password"), layout );
     }
     private void addPasswordField() {
         

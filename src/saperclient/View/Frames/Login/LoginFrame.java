@@ -56,7 +56,7 @@ public class LoginFrame {
                 frame.setResizable( false );
 
                 frame.setLocationRelativeTo( null );
-                frame.setTitle( "Saper - Logowanie" );
+                frame.setTitle( "Saper - Sign In" );
                 frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
             }
         });
@@ -79,7 +79,7 @@ public class LoginFrame {
     
     private void addLoginTitle() {
 
-        JLabel login_label = new JLabel( "Logowanie" );
+        JLabel login_label = new JLabel( "Sign In" );
 
             login_label.setFont( login_label.getFont().deriveFont( 30.f ) );
 
@@ -101,7 +101,7 @@ public class LoginFrame {
     
     private void addLoginButton() {
         
-        JButton login_button = new JButton( "Zaloguj" );
+        JButton login_button = new JButton( "Sign In" );
 
             login_button.setPreferredSize( SIZE_BUTTON );
             login_button.setName( "login" );
@@ -119,7 +119,7 @@ public class LoginFrame {
     }
     private void addRegisterButton() {
         
-        JButton register_button = new JButton( "Zarejestruj" );
+        JButton register_button = new JButton( "Sign Up" );
 
             register_button.setPreferredSize( SIZE_BUTTON );
             register_button.setName( "register" );

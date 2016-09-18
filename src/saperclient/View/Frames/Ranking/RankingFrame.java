@@ -112,10 +112,10 @@ public class RankingFrame {
                             return "Login";
                         
                         case 1:
-                            return "Ilość rozegranych gier";
+                            return "Amount of games";
                         
                         case 2:
-                            return "Ilość wygranych";
+                            return "Amount of winnings";
                     }
                     
                     return "";
@@ -178,7 +178,7 @@ public class RankingFrame {
     
     private void addBackButton() {
         
-        JButton back_button = new JButton( "Wróć" );
+        JButton back_button = new JButton( "Back" );
 
             back_button.setPreferredSize( SIZE_BUTTON );
             back_button.addActionListener( new ActionListener() {

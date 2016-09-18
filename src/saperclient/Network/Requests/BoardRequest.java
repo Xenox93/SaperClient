@@ -32,7 +32,7 @@ public class BoardRequest {
             SaperClient.client.getMsgs();
 
         } catch( Exception e ) {
-            msg = "Problem z połączeniem.";
+            msg = "The problem with the connection";
             e.printStackTrace();
 
         } finally {
@@ -59,7 +59,7 @@ public class BoardRequest {
             SaperClient.client.getMsgs();
 
         } catch( Exception e ) {
-            msg = "Problem z połączeniem.";
+            msg = "The problem with the connection";
             e.printStackTrace();
 
         } finally {

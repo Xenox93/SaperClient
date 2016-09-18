@@ -67,7 +67,7 @@ public class BoardFrame {
                 frame.setResizable( false );
 
                 frame.setLocationRelativeTo( null );
-                frame.setTitle( "Saper - Plansza" );
+                frame.setTitle( "Saper" );
                 frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
             }
         });

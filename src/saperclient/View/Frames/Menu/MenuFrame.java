@@ -246,7 +246,7 @@ public class MenuFrame {
     
         private void addLogOutButton() {
 
-            JButton logout_button = new JButton( "Wyloguj" );
+            JButton logout_button = new JButton( "Sign Out" );
 
                 logout_button.setPreferredSize( SIZE_BUTTON );
                 logout_button.setName( "logout" );
@@ -264,7 +264,7 @@ public class MenuFrame {
         }
         private void addPlayButton() {
 
-            JButton play_button = new JButton( "Graj" );
+            JButton play_button = new JButton( "Play" );
 
                 play_button.setFont( play_button.getFont().deriveFont( 25.f ) );
                 play_button.addActionListener( new ActionListener() {

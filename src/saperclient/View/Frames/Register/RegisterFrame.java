@@ -56,7 +56,7 @@ public class RegisterFrame {
                 frame.setResizable( false );
 
                 frame.setLocationRelativeTo( null );
-                frame.setTitle( "Saper - Rejestrowanie" );
+                frame.setTitle( "Saper - Sign Up" );
                 frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
             }
         });
@@ -76,7 +76,7 @@ public class RegisterFrame {
     
     private void addRegisterTitle() {
 
-        JLabel register_label = new JLabel( "Rejestrowanie" );
+        JLabel register_label = new JLabel( "Sign Up" );
 
             register_label.setFont( register_label.getFont().deriveFont( 30.f ) );
 
@@ -96,7 +96,7 @@ public class RegisterFrame {
     }
     private void addRegisterButton() {
         
-        JButton register_button = new JButton( "Zarejestruj" );
+        JButton register_button = new JButton( "Sign Up" );
 
             register_button.setPreferredSize( SIZE_BUTTON );
             register_button.setName( "register" );
@@ -114,7 +114,7 @@ public class RegisterFrame {
     }
     private void addBackButton() {
         
-        JButton back_button = new JButton( "Anuluj" );
+        JButton back_button = new JButton( "Cancel" );
 
             back_button.setPreferredSize( SIZE_BUTTON );
             back_button.setName( "back" );
